@@ -1,0 +1,14 @@
+spring:
+  dubbo: 
+    application:
+      name: provider
+    protocol:
+      name: dubbo
+      port: 20880
+    registry: zookeeper://127.0.0.1:2181
+    scan: com.cheetah.dubbo.server.service
+  data:
+    solr:
+      host: http://127.0.0.1:8983/solr
+server: 
+  port: 9090

@@ -1,0 +1,8 @@
+spring:
+  dubbo: 
+    application:
+      name: consumer
+    registry: zookeeper://127.0.0.1:2181
+    scan: com.cheetah.dubbo.client.service
+server: 
+  port: 9091
