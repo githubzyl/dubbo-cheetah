@@ -11,4 +11,4 @@ spring:
     solr:
       host: http://127.0.0.1:8983/solr
 server: 
-  port: 9090
+  port: 9099
