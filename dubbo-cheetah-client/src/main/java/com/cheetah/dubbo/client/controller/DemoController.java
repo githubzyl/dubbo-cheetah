@@ -17,8 +17,8 @@ public class DemoController {
 	@Autowired
 	private KafkaSender kafkaSender;
 	
-	@GetMapping("/solr/search/{content")
-	public Object solrSearch(@PathVariable String content ) throws Exception {
+	@GetMapping("/dubbo/hello/{content}")
+	public Object hello(@PathVariable String content ) throws Exception {
 		return demoConsumerService.sayHello(content);
 	}
 	
