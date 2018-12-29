@@ -1,11 +1,16 @@
 package com.cheetah.dubbo.api.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.cheetah.dubbo.api.common.BaseModel;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.cheetah.dubbo.api.common.BaseModel;
+import com.cheetah.dubbo.api.enums.GenderEnum;
+import com.cheetah.dubbo.api.enums.LockStatusEnum;
+import com.cheetah.dubbo.api.enums.UserStatusEnum;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -63,19 +68,19 @@ public class User extends BaseModel<User> {
      * 用户状态(0：正常，1：禁用，默认正常)
      */
     @TableField("user_status")
-    private String userStatus;
+    private UserStatusEnum userStatus;
 
     /**
      * 锁定状态0：非锁定，1：锁定，默认非锁定)
      */
     @TableField("lock_status")
-    private String lockStatus;
+    private LockStatusEnum lockStatus;
 
     /**
      * 性别(男：'0',女：'1')
      */
     @TableField("gender")
-    private String gender;
+    private GenderEnum gender;
 
     /**
      * 头像
@@ -103,6 +108,32 @@ public class User extends BaseModel<User> {
     @com.baomidou.mybatisplus.annotation.Version
     private Integer version;
 
+
+    public static final String FIELD_ID = "id";
+
+    public static final String FIELD_USER_NAME = "user_name";
+
+    public static final String FIELD_PASSWORD = "password";
+
+    public static final String FIELD_REAL_NAME = "real_name";
+
+    public static final String FIELD_MOBILE = "mobile";
+
+    public static final String FIELD_EMAIL = "email";
+
+    public static final String FIELD_USER_STATUS = "user_status";
+
+    public static final String FIELD_LOCK_STATUS = "lock_status";
+
+    public static final String FIELD_GENDER = "gender";
+
+    public static final String FIELD_PHOTO = "photo";
+
+    public static final String FIELD_DEPARTMENT_ID = "department_id";
+
+    public static final String FIELD_IS_DEL = "is_del";
+
+    public static final String FIELD_VERSION = "version";
 
     @Override
     protected Serializable pkVal() {

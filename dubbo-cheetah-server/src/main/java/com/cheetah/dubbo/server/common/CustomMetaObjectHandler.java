@@ -16,11 +16,15 @@ public class CustomMetaObjectHandler implements MetaObjectHandler{
 
 	@Override
 	public void insertFill(MetaObject metaObject) {
-		
+		setFieldValByName("tenantId", 1, metaObject);
+		setFieldValByName("creater", 1, metaObject);
+		setFieldValByName("createTime", new Date(), metaObject);	
+		this.updateFill(metaObject);
 	}
 
 	@Override
 	public void updateFill(MetaObject metaObject) {
+		setFieldValByName("lastModifier", 1, metaObject);
 		setFieldValByName("lastModifyTime", new Date(), metaObject);		
 	}
 

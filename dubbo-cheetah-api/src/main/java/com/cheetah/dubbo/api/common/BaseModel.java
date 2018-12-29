@@ -25,22 +25,25 @@ public abstract class BaseModel<T extends Model<?>> extends Model<T> implements 
 	/**
 	 * 创建人
 	 */
+	@TableField(value = "creater",fill = FieldFill.INSERT)
 	private Integer creater;
 	
 	/**
 	 * 创建时间
 	 */
+	@TableField(value = "create_time",fill = FieldFill.INSERT)
 	private Date createTime;
 	
 	/**
 	 * 最后一次修改人
 	 */
+	@TableField(value = "last_modifier",fill = FieldFill.INSERT_UPDATE)
 	private Integer lastModifier;
 	
 	/**
 	 * 最后一次修改时间
 	 */
-	@TableField(value = "last_modify_time",fill = FieldFill.UPDATE)
+	@TableField(value = "last_modify_time",fill = FieldFill.INSERT_UPDATE)
 	private Date lastModifyTime;
 
 }

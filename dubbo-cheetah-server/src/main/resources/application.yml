@@ -32,6 +32,7 @@ server:
 mybatis-plus:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath*:mybatis/mapper/*.xml
+  typeEnumsPackage: com.cheetah.dubbo.api.enums
 dubbo: 
     application:
       name: provider

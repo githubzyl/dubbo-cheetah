@@ -121,7 +121,7 @@ public class ${entity} implements Serializable {
 
 <#if entityColumnConstant>
     <#list table.fields as field>
-    public static final String ${field.name?upper_case} = "${field.name}";
+    public static final String FIELD_${field.name?upper_case} = "${field.name}";
 
     </#list>
 </#if>

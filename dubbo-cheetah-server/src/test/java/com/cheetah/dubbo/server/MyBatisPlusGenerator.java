@@ -58,6 +58,7 @@ public class MyBatisPlusGenerator {
                 .setLogicDeleteFieldName("is_del")
                 .setEntityLombokModel(true)
                 .setRestControllerStyle(true)
+                .setEntityColumnConstant(true)
 //                .setExclude("DATABASECHANGELOG","DATABASECHANGELOGLOCK")
                 .setSuperEntityColumns("tenant_id","creater","create_time","last_modifier","last_modify_time");
                 
