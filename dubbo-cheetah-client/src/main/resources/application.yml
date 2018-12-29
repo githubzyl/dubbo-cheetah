@@ -1,23 +1,12 @@
-spring:
-  dubbo: 
-    application:
-      name: consumer
-    registry: zookeeper://127.0.0.1:2181
-    scan: com.cheetah.dubbo.client.service
-  kafka:
-    bootstrap-servers: 192.168.50.69:9092
-    producer:
-      retries: 0
-      batch-size: 16384
-      buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      group-id: myGroup
-      auto-offset-reset: earliest
-      enable-auto-commit: true
-      auto-commit-interval: 100
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 server: 
   port: 9098
+dubbo: 
+    application:
+      name: consumer
+    protocol:
+      name: dubbo
+      port: 20880
+    registry: 
+      address: zookeeper://127.0.0.1:2181
+    consumer: 
+      timeout: 5000

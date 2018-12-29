@@ -1,14 +1,44 @@
 spring:
-  dubbo: 
+  datasource:
+    druid:
+      stat-view-servlet:
+#        loginUsername: admin
+#        loginPassword: 123456
+        reset-enable: false
+    dynamic:
+      primary: master
+      p6sy: true # 默认false,建议线上关闭
+      druid: 
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        filters: stat,wall, slf4j
+      datasource: 
+        master: 
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://47.98.113.109:8732/cheetah_new?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false
+server: 
+  port: 9099
+mybatis-plus:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+dubbo: 
     application:
       name: provider
     protocol:
       name: dubbo
       port: 20880
-    registry: zookeeper://127.0.0.1:2181
-    scan: com.cheetah.dubbo.server.service
-  data:
-    solr:
-      host: http://127.0.0.1:8983/solr
-server: 
-  port: 9099
+    registry: 
+      address: zookeeper://127.0.0.1:2181
+    provider: 
+     timeout: 1000
