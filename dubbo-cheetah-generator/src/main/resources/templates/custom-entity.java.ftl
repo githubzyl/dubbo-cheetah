@@ -1,11 +1,8 @@
 package ${package.Entity};
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.cheetah.dubbo.api.common.BaseModel;
-import java.io.Serializable;
+<#list table.importPackages as pkg>
+import ${pkg};
+</#list>
 <#if swagger2>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -85,13 +82,13 @@ public class ${entity} implements Serializable {
     </#if>
 <#-- 乐观锁注解 -->
     <#if (versionFieldName!"") == field.name>
-    @com.baomidou.mybatisplus.annotation.Version
+    @Version
     </#if>
 <#-- 逻辑删除注解 -->
     <#if (logicDeleteFieldName!"") == field.name>
-    @com.baomidou.mybatisplus.annotation.TableLogic
+    @TableLogic
     </#if>
-    private ${field.propertyType} ${field.propertyName};
+    private ${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
 
@@ -102,21 +99,36 @@ public class ${entity} implements Serializable {
         <#else>
             <#assign getprefix="get"/>
         </#if>
-    public ${field.propertyType} ${getprefix}${field.capitalName}() {
+    public ${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)} ${getprefix}${field.capitalName}() {
         return ${field.propertyName};
     }
 
         <#if entityBuilderModel>
-    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public ${entity} set${field.capitalName}(${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)}} ${field.propertyName}) {
         <#else>
-    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public void set${field.capitalName}(${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)} ${field.propertyName}) {
         </#if>
+        <#if field.propertyType == "String" && ColumnEnumUtils.isString(field.propertyName)>
+        this.${field.propertyName} = (${field.propertyName} == null ? null : ${field.propertyName}.trim());
+        <#else>
         this.${field.propertyName} = ${field.propertyName};
+        </#if>
         <#if entityBuilderModel>
         return this;
         </#if>
     }
     </#list>
+</#if>
+<#-- 当使用lombok时,也需要重写String类型的set方法 -->
+<#if entityLombokModel>
+	<#list table.fields as field>
+		 <#if field.propertyType == "String" && ColumnEnumUtils.isString(field.propertyName)>
+		 
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+        this.${field.propertyName} = (${field.propertyName} == null ? null : ${field.propertyName}.trim());
+    }
+		 </#if>
+	</#list>
 </#if>
 
 <#if entityColumnConstant>

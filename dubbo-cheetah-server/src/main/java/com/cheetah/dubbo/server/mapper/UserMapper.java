@@ -1,7 +1,7 @@
 package com.cheetah.dubbo.server.mapper;
 
 import com.cheetah.dubbo.api.entity.User;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cheetah.dubbo.api.common.supers.SuperMapper;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Jason
- * @since 2018-12-29
+ * @since 2018-12-30
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends SuperMapper<User> {
 
 }

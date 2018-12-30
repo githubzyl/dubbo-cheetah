@@ -27,8 +27,6 @@
 		<dynamic-datasource-spring-boot-starter.version>2.4.2</dynamic-datasource-spring-boot-starter.version>
 		<druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
 		<p6spy.version>3.8.0</p6spy.version>
-		<velocity-engine-core.version>2.0</velocity-engine-core.version>
-		<freemarker.version>2.3.28</freemarker.version>
 	</properties>
 
 	<dependencies>
@@ -42,10 +40,10 @@
 			<version>${mysqlconn.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>${dubbo-spring-boot-starter.version}</version>
-        </dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+			<version>${dubbo-spring-boot-starter.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>dynamic-datasource-spring-boot-starter</artifactId>
@@ -62,27 +60,15 @@
 			<version>${p6spy.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-engine-core</artifactId>
-			<version>${velocity-engine-core.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>${freemarker.version}</version><!--$NO-MVN-MAN-VER$ -->
+			<groupId>com.cheetah.dubbo</groupId>
+			<artifactId>dubbo-cheetah-api</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.cheetah.dubbo</groupId>
-			<artifactId>dubbo-cheetah-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>

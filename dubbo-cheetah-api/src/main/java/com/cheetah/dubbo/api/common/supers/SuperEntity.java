@@ -1,4 +1,4 @@
-package com.cheetah.dubbo.api.common;
+package com.cheetah.dubbo.api.common.supers;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,9 +10,15 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * <p>Description: 用来定义一些表公用的字段</p>
+ * @author   zhaoyl
+ * @date      2018-12-30
+ * @version  v1.0
+ */
 @Getter
 @Setter
-public abstract class BaseModel<T extends Model<?>> extends Model<T> implements Serializable{
+public abstract class SuperEntity<T extends Model<?>> extends Model<T> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

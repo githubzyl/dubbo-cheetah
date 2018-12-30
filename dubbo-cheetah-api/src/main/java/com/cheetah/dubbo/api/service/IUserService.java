@@ -1,7 +1,7 @@
 package com.cheetah.dubbo.api.service;
 
 import com.cheetah.dubbo.api.entity.User;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.cheetah.dubbo.api.common.supers.ISuperService;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Jason
- * @since 2018-12-29
+ * @since 2018-12-30
  */
-public interface IUserService extends IService<User> {
+public interface IUserService extends ISuperService<User> {
 
 }

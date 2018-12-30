@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.cheetah.dubbo</groupId>
+	<artifactId>dubbo-cheetah-generator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>${project.artifactId}</name>
+	<description>the project for dubbo-cheetah-generator</description>
+
+	<parent>
+		<groupId>top.zylsite.cheetah.dubbo</groupId>
+		<artifactId>dubbo-cheetah</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<velocity-engine-core.version>2.0</velocity-engine-core.version>
+		<freemarker.version>2.3.28</freemarker.version>
+		<mysqlconn.version>5.1.41</mysqlconn.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-engine-core</artifactId>
+			<version>${velocity-engine-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>com.cheetah.dubbo</groupId>
+			<artifactId>dubbo-cheetah-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysqlconn.version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

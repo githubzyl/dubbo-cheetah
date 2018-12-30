@@ -3,9 +3,9 @@ package ${package.ServiceImpl};
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cheetah.dubbo.api.common.InterfaceVersion;
-import com.cheetah.dubbo.api.common.BaseService;
 
 /**
  * <p>
@@ -21,7 +21,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 <#else>
-public class ${table.serviceImplName} extends BaseService<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
 }
 </#if>

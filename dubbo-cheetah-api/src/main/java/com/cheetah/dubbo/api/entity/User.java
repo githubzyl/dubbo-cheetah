@@ -1,16 +1,13 @@
 package com.cheetah.dubbo.api.entity;
 
-import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cheetah.dubbo.api.common.BaseModel;
-import com.cheetah.dubbo.api.enums.GenderEnum;
-import com.cheetah.dubbo.api.enums.LockStatusEnum;
-import com.cheetah.dubbo.api.enums.UserStatusEnum;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.cheetah.dubbo.api.common.supers.SuperEntity;
+import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -21,13 +18,13 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Jason
- * @since 2018-12-29
+ * @since 2018-12-30
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("t_user")
-public class User extends BaseModel<User> {
+public class User extends SuperEntity<User> {
 
     private static final long serialVersionUID = 1L;
 
@@ -68,19 +65,19 @@ public class User extends BaseModel<User> {
      * 用户状态(0：正常，1：禁用，默认正常)
      */
     @TableField("user_status")
-    private UserStatusEnum userStatus;
+    private com.cheetah.dubbo.api.enums.UserStatusEnum userStatus;
 
     /**
      * 锁定状态0：非锁定，1：锁定，默认非锁定)
      */
     @TableField("lock_status")
-    private LockStatusEnum lockStatus;
+    private com.cheetah.dubbo.api.enums.LockStatusEnum lockStatus;
 
     /**
      * 性别(男：'0',女：'1')
      */
     @TableField("gender")
-    private GenderEnum gender;
+    private com.cheetah.dubbo.api.enums.GenderEnum gender;
 
     /**
      * 头像
@@ -98,16 +95,40 @@ public class User extends BaseModel<User> {
      * 是否删除(0:未删除,1:已删除,默认0)
      */
     @TableField("is_del")
-    @com.baomidou.mybatisplus.annotation.TableLogic
+    @TableLogic
     private Integer isDel;
 
     /**
      * 乐观锁版本号
      */
     @TableField("version")
-    @com.baomidou.mybatisplus.annotation.Version
+    @Version
     private Integer version;
 
+		 
+    public void setUserName(String userName) {
+        this.userName = (userName == null ? null : userName.trim());
+    }
+		 
+    public void setPassword(String password) {
+        this.password = (password == null ? null : password.trim());
+    }
+		 
+    public void setRealName(String realName) {
+        this.realName = (realName == null ? null : realName.trim());
+    }
+		 
+    public void setMobile(String mobile) {
+        this.mobile = (mobile == null ? null : mobile.trim());
+    }
+		 
+    public void setEmail(String email) {
+        this.email = (email == null ? null : email.trim());
+    }
+		 
+    public void setPhoto(String photo) {
+        this.photo = (photo == null ? null : photo.trim());
+    }
 
     public static final String FIELD_ID = "id";
 
