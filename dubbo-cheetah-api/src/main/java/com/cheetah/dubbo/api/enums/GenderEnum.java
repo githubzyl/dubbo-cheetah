@@ -15,5 +15,5 @@ public enum GenderEnum implements SuperEnum<String, String> {
 		this.value = value;
 		this.label = label;
 	}
-
+	
 }

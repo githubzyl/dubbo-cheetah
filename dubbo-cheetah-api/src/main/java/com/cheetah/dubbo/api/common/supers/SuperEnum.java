@@ -15,28 +15,24 @@ public interface SuperEnum<V extends Serializable, K extends Serializable> exten
     
     @SuppressWarnings("unchecked")
 	default V getValue() {
-        Field field = ReflectionUtils.findField(this.getClass(), DEFAULT_VALUE_NAME);
-        if (field == null)
-            return null;
-        try {
-            field.setAccessible(true);
-            return (V) field.get(this);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    	return (V) get(DEFAULT_VALUE_NAME);
     }
     
     @SuppressWarnings("unchecked")
 	default K getLabel() {
-        Field field = ReflectionUtils.findField(this.getClass(), DEFAULT_LABEL_NAME);
-        if (field == null)
-            return null;
-        try {
-            field.setAccessible(true);
-            return (K) field.get(this);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    	return (K) get(DEFAULT_LABEL_NAME);
+    }
+    
+    default Object get(String propertyName) {
+    	 Field field = ReflectionUtils.findField(this.getClass(), propertyName);
+         if (field == null)
+             return null;
+         try {
+             field.setAccessible(true);
+             return field.get(this);
+         } catch (IllegalAccessException e) {
+             throw new RuntimeException(e);
+         }
     }
     
 }
