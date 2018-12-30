@@ -76,6 +76,7 @@ public class MyBatisPlusGenerator {
                 .setSuperControllerClass("com.cheetah.dubbo.api.common.BaseController")
                 .setVersionFieldName("version")
                 .setLogicDeleteFieldName("is_del")
+//                .setEntityBuilderModel(true)
                 .setEntityLombokModel(true)
                 .setRestControllerStyle(true)
                 .setEntityColumnConstant(true)

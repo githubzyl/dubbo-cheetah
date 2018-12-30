@@ -88,7 +88,7 @@ public class ${entity} implements Serializable {
     <#if (logicDeleteFieldName!"") == field.name>
     @TableLogic
     </#if>
-    private ${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)} ${field.propertyName};
+    private ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
 
@@ -99,16 +99,16 @@ public class ${entity} implements Serializable {
         <#else>
             <#assign getprefix="get"/>
         </#if>
-    public ${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)} ${getprefix}${field.capitalName}() {
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
         return ${field.propertyName};
     }
 
         <#if entityBuilderModel>
-    public ${entity} set${field.capitalName}(${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)}} ${field.propertyName}) {
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         <#else>
-    public void set${field.capitalName}(${ColumnEnumUtils.getFieldType(field.propertyName,field.propertyType)} ${field.propertyName}) {
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         </#if>
-        <#if field.propertyType == "String" && ColumnEnumUtils.isString(field.propertyName)>
+        <#if field.propertyType == "String">
         this.${field.propertyName} = (${field.propertyName} == null ? null : ${field.propertyName}.trim());
         <#else>
         this.${field.propertyName} = ${field.propertyName};
@@ -122,7 +122,7 @@ public class ${entity} implements Serializable {
 <#-- 当使用lombok时,也需要重写String类型的set方法 -->
 <#if entityLombokModel>
 	<#list table.fields as field>
-		 <#if field.propertyType == "String" && ColumnEnumUtils.isString(field.propertyName)>
+		 <#if field.propertyType == "String">
 		 
     public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         this.${field.propertyName} = (${field.propertyName} == null ? null : ${field.propertyName}.trim());

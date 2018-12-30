@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.cheetah.dubbo.api.common.supers.SuperEntity;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.cheetah.dubbo.api.enums.GenderEnum;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.cheetah.dubbo.api.enums.UserStatusEnum;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import com.cheetah.dubbo.api.enums.LockStatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -65,19 +68,19 @@ public class User extends SuperEntity<User> {
      * 用户状态(0：正常，1：禁用，默认正常)
      */
     @TableField("user_status")
-    private com.cheetah.dubbo.api.enums.UserStatusEnum userStatus;
+    private UserStatusEnum userStatus;
 
     /**
      * 锁定状态0：非锁定，1：锁定，默认非锁定)
      */
     @TableField("lock_status")
-    private com.cheetah.dubbo.api.enums.LockStatusEnum lockStatus;
+    private LockStatusEnum lockStatus;
 
     /**
      * 性别(男：'0',女：'1')
      */
     @TableField("gender")
-    private com.cheetah.dubbo.api.enums.GenderEnum gender;
+    private GenderEnum gender;
 
     /**
      * 头像

@@ -1,13 +1,13 @@
 package com.cheetah.dubbo.generator;
 
+import java.util.List;
 import java.util.Map;
 
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.springframework.util.CollectionUtils;
 
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.ext.beans.BeansWrapperBuilder;
-import freemarker.template.Configuration;
-import freemarker.template.TemplateHashModel;
+import com.baomidou.mybatisplus.generator.config.po.TableField;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 /**
  * <p>Description: 自定义freemarker渲染引擎，加入java静态方法，生成枚举属性</p>
@@ -19,10 +19,22 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
 	@Override
 	public void writer(Map<String, Object> objectMap, String templatePath, String outputFile) throws Exception {
-		BeansWrapper wrapper = new BeansWrapperBuilder(Configuration.VERSION_2_3_28).build();
-		TemplateHashModel staticModels = wrapper.getStaticModels();  
-		TemplateHashModel fileStatics = (TemplateHashModel) staticModels.get("com.cheetah.dubbo.generator.ColumnEnumUtils");
-	    objectMap.put("ColumnEnumUtils", fileStatics);
+	    //处理枚举类型
+	    Object obj = objectMap.get("table");
+	    if(null != obj) {
+	    	TableInfo tableInfo = (TableInfo) obj;
+	    	List<TableField> tableFields = tableInfo.getFields();
+	    	if(!CollectionUtils.isEmpty(tableFields)) {
+	    		DBColumnEnumType type = null;
+	    		for(TableField field : tableFields) {
+	    			type = DBColumnEnumType.getEnumTypeByColumnName(field.getName());
+	    			if(null != type) {
+	    				field.setColumnType(type);
+	    				tableInfo.setImportPackages(type.getPkg());
+	    			}
+	    		}
+	    	}
+	    }
 		super.writer(objectMap, templatePath, outputFile);
 	}
 

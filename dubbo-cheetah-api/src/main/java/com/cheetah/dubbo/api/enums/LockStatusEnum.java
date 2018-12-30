@@ -15,5 +15,10 @@ public enum LockStatusEnum implements SuperEnum<String, String> {
 		this.value = value;
 		this.label = label;
 	}
+	
+	@Override
+	public String toString() {
+		return "[value=" + this.getValue() + ",label=" + this.getLabel() + "]";
+	}
 
 }

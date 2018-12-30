@@ -16,4 +16,9 @@ public enum GenderEnum implements SuperEnum<String, String> {
 		this.label = label;
 	}
 	
+	@Override
+	public String toString() {
+		return "[value=" + this.getValue() + ",label=" + this.getLabel() + "]";
+	}
+	
 }
