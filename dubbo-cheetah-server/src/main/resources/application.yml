@@ -36,10 +36,18 @@ mybatis-plus:
 dubbo: 
     application:
       name: provider
-    protocol:
-      name: dubbo
-      port: 20880
+    config:
+      multiple: true
+    protocols: 
+      dubbo: 
+       port: 20880
+       name: dubbo
+      rest: 
+       server: tomcat
+       contextpath: /rest
+       port: 8088
+       name: rest
     registry: 
       address: zookeeper://127.0.0.1:2181
     provider: 
-     timeout: 1000
+     timeout: 1000    

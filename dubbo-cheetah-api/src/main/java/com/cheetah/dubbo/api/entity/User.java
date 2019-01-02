@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.cheetah.dubbo.api.enums.UserStatusEnum;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.cheetah.dubbo.api.enums.LockStatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +26,7 @@ import lombok.experimental.Accessors;
  * @author Jason
  * @since 2019-01-02
  */
+@XmlRootElement
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)

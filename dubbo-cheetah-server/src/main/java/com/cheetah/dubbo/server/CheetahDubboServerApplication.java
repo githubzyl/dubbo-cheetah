@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 
-@EnableDubbo
+@EnableDubbo(multipleConfig=true)
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
 public class CheetahDubboServerApplication {
 
