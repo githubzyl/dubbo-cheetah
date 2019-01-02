@@ -13,7 +13,7 @@ import com.cheetah.dubbo.api.common.InterfaceVersion;
  * </p>
  *
  * @author Jason
- * @since 2018-12-30
+ * @since 2019-01-02
  */
 @Service(version = InterfaceVersion.VERSION_1_0)
 public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implements IUserService {

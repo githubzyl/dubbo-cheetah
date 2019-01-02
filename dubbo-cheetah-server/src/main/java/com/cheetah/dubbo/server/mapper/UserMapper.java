@@ -9,7 +9,7 @@ import com.cheetah.dubbo.api.common.supers.SuperMapper;
  * </p>
  *
  * @author Jason
- * @since 2018-12-30
+ * @since 2019-01-02
  */
 public interface UserMapper extends SuperMapper<User> {
 
