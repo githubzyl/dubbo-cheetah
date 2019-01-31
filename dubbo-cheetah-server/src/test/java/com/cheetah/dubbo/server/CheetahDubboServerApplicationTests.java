@@ -1,15 +1,14 @@
 package com.cheetah.dubbo.server;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cheetah.dubbo.api.service.IUserService;
+import com.cheetah.dubbo.base.entity.User;
+import com.cheetah.dubbo.base.enums.GenderEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.cheetah.dubbo.api.entity.User;
-import com.cheetah.dubbo.api.enums.GenderEnum;
-import com.cheetah.dubbo.api.service.IUserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,7 +26,6 @@ public class CheetahDubboServerApplicationTests {
 		entity.setMobile("54321123451");
 		entity.setEmail("54321123451@126.com");
 		entity.setGender(GenderEnum.MALE);
-		entity.setVersion(0);
 		userService.save(entity);
 	}
 

@@ -1,13 +1,13 @@
 package com.cheetah.dubbo.generator;
 
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
-import com.cheetah.dubbo.api.enums.GenderEnum;
-import com.cheetah.dubbo.api.enums.LockStatusEnum;
-import com.cheetah.dubbo.api.enums.UserStatusEnum;
+import com.cheetah.dubbo.base.enums.GenderEnum;
+import com.cheetah.dubbo.base.enums.LockStatusEnum;
+import com.cheetah.dubbo.base.enums.UserStatusEnum;
 
 public enum DBColumnEnumType implements IColumnType {
 
-	GENDER("gender", GenderEnum.class), 
+	GENDER("gender", GenderEnum.class),
 	USER_STATUS("user_status", UserStatusEnum.class),
 	LOCK_STATUS("lock_status", LockStatusEnum.class)
 	;

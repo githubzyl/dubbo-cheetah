@@ -1,6 +1,6 @@
 package com.cheetah.dubbo.api.service;
 
-import com.cheetah.dubbo.api.entity.User;
+import com.cheetah.dubbo.base.entity.User;
 
 /**
  * <p>Description: 对外提供rest访问的service</p>

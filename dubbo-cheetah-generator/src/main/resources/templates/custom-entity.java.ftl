@@ -122,12 +122,13 @@ public class ${entity} implements Serializable {
 <#-- 当使用lombok时,也需要重写String类型的set方法 -->
 <#if entityLombokModel>
 	<#list table.fields as field>
-		 <#if field.propertyType == "String">
-		 
     public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+        <#if field.propertyType == "String">
         this.${field.propertyName} = (${field.propertyName} == null ? null : ${field.propertyName}.trim());
+        <#else>
+        this.${field.propertyName} = ${field.propertyName};
+        </#if>
     }
-		 </#if>
 	</#list>
 </#if>
 

@@ -26,13 +26,13 @@ spring:
           username: root
           password: 123456
           driver-class-name: com.mysql.jdbc.Driver
-          url: jdbc:mysql://47.98.113.109:8732/cheetah_new?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false
+          url: jdbc:mysql://47.98.113.109:8732/cheetah_music?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false
 server: 
   port: 9099
 mybatis-plus:
-  config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath*:mybatis/mapper/*.xml
-  typeEnumsPackage: com.cheetah.dubbo.api.enums
+  config-location: classpath:config/mybatis-config.xml
+  mapper-locations: classpath*:mapper/*.xml
+  typeEnumsPackage: com.cheetah.dubbo.base.enums
 dubbo: 
     application:
       name: provider

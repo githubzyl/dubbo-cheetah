@@ -2,7 +2,7 @@ server:
   port: 9098
 dubbo: 
     application:
-      name: consumer
+      name: consumer-client
     protocol:
       name: dubbo
       port: 20880

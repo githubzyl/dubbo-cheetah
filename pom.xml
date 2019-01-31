@@ -60,6 +60,9 @@
 
     <modules>
         <module>dubbo-cheetah-api</module>
+        <module>dubbo-cheetah-base</module>
+        <module>dubbo-cheetah-common</module>
+        <module>dubbo-cheetah-reptile</module>
         <module>dubbo-cheetah-client</module>
         <module>dubbo-cheetah-server</module>
         <module>dubbo-cheetah-generator</module>

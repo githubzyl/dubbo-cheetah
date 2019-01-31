@@ -6,6 +6,7 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cheetah.dubbo.api.common.InterfaceVersion;
+import com.cheetah.dubbo.api.common.DubboConstants;
 
 /**
  * <p>
@@ -15,7 +16,8 @@ import com.cheetah.dubbo.api.common.InterfaceVersion;
  * @author ${author}
  * @since ${date}
  */
-@Service(version = InterfaceVersion.VERSION_1_0)
+@Service(version = InterfaceVersion.VERSION_1_0,protocol= {DubboConstants.PROTOCOL_DUBBO})
+@org.springframework.stereotype.Service
 <#if kotlin>
 open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
 

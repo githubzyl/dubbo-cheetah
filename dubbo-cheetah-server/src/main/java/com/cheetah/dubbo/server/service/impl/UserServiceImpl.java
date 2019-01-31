@@ -1,12 +1,12 @@
 package com.cheetah.dubbo.server.service.impl;
 
-import com.cheetah.dubbo.api.entity.User;
-import com.cheetah.dubbo.server.mapper.UserMapper;
-import com.cheetah.dubbo.api.service.IUserService;
-import com.cheetah.dubbo.api.common.supers.SuperServiceImpl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cheetah.dubbo.api.common.DubboConstants;
 import com.cheetah.dubbo.api.common.InterfaceVersion;
+import com.cheetah.dubbo.api.service.IUserService;
+import com.cheetah.dubbo.base.entity.User;
+import com.cheetah.dubbo.base.mapper.UserMapper;
+import com.cheetah.dubbo.common.supers.SuperServiceImpl;
 
 /**
  * <p>
@@ -14,10 +14,9 @@ import com.cheetah.dubbo.api.common.InterfaceVersion;
  * </p>
  *
  * @author Jason
- * @since 2019-01-02
+ * @since 2019-01-30
  */
-@Service(version = InterfaceVersion.VERSION_1_0,protocol=DubboConstants.PROTOCOL_DUBBO)
-@org.springframework.stereotype.Service
+@Service(version = InterfaceVersion.VERSION_1_0,protocol= {DubboConstants.PROTOCOL_DUBBO})
 public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implements IUserService {
 
 }

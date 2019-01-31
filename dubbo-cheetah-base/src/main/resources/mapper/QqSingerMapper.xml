@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheetah.dubbo.base.mapper.QqSingerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cheetah.dubbo.base.entity.QqSinger">
+        <id column="id" property="id" />
+        <result column="singer_id" property="singerId" />
+        <result column="singer_mid" property="singerMid" />
+        <result column="singer_name" property="singerName" />
+        <result column="singer_pic" property="singerPic" />
+        <result column="country" property="country" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, singer_id, singer_mid, singer_name, singer_pic, country
+    </sql>
+
+</mapper>

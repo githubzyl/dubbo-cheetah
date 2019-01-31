@@ -1,3 +1,4 @@
+/.idea/
 /.apt_generated/
 /.apt_generated_tests/
 /.mvn/
@@ -7,3 +8,4 @@
 .project
 .factorypath
 .springBeans
+.iml

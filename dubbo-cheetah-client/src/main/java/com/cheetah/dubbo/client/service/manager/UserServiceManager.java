@@ -6,7 +6,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cheetah.dubbo.api.common.InterfaceVersion;
-import com.cheetah.dubbo.api.entity.User;
+import com.cheetah.dubbo.base.entity.User;
 import com.cheetah.dubbo.api.service.IUserService;
 
 @Component
