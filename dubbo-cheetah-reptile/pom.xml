@@ -21,6 +21,7 @@
         <mysqlconn.version>5.1.41</mysqlconn.version>
         <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
         <dynamic-datasource-spring-boot-starter.version>2.4.2</dynamic-datasource-spring-boot-starter.version>
+        <swagger.version>2.6.1</swagger.version>
     </properties>
 
     <dependencies>
@@ -31,6 +32,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -56,6 +61,17 @@
             <groupId>top.zylsite.cheetah.dubbo</groupId>
             <artifactId>dubbo-cheetah-base</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <!-- swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
     </dependencies>
 

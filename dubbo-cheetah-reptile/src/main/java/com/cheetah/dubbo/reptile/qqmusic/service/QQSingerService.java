@@ -21,15 +21,18 @@ import java.util.List;
 public class QQSingerService extends SuperServiceImpl<QqSingerMapper, QqSinger> {
 
     @Transactional
-    public void batchInsert(List<QqSinger> singers) {
+    public int batchInsert(List<QqSinger> singers) {
         if(CollectionUtils.isEmpty(singers)){
-            return;
+            return 0;
         }
+        int total = 0;
         for(QqSinger singer : singers){
             if(!isExist(singer.getSingerId())){
                 this.save(singer);
+                total++;
             }
         }
+        return total;
     }
 
     private boolean isExist(Long singerId){

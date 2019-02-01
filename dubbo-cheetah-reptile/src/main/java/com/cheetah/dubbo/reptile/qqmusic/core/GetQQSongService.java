@@ -26,7 +26,8 @@ public class GetQQSongService {
     @Autowired
     private QQSongService songService;
 
-    public void get(String singer_mid, Integer cur_page, Integer num, Integer max_page) {
+    public int get(String singer_mid, Integer cur_page, Integer num, Integer max_page) {
+        int total = 0;
         int start_page = cur_page;
         List<QQSongVO> songVOList = new ArrayList<>();
         Long singerId = null;
@@ -50,11 +51,12 @@ public class GetQQSongService {
                 songVOList.add(songVO);
             }
             if(!CollectionUtils.isEmpty(songVOList)){
-                songService.batchInsert(singerId, songVOList);
+                total += songService.batchInsert(singerId, songVOList);
                 songVOList.clear();
             }
             start_page++;
         }
+        return total;
     }
 
     public String buildParam(String singer_mid, Integer cur_page, Integer num) {

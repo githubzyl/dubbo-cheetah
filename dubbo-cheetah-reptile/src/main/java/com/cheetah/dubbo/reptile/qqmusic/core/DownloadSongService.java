@@ -3,15 +3,19 @@ package com.cheetah.dubbo.reptile.qqmusic.core;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cheetah.dubbo.base.entity.MongoFile;
 import com.cheetah.dubbo.base.entity.QqSong;
 import com.cheetah.dubbo.common.utils.CustomFileUtil;
 import com.cheetah.dubbo.common.utils.HttpUtils;
 import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.DownloadSongParam;
 import com.cheetah.dubbo.reptile.qqmusic.service.QQSongService;
-import org.apache.commons.lang3.StringUtils;
+import com.cheetah.dubbo.reptile.service.MongoFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>Description: </p>
@@ -28,16 +32,33 @@ public class DownloadSongService {
     @Autowired
     private QQSongService qqSongService;
 
+    @Autowired
+    private MongoFileService mongoFileService;
+
     //下载歌曲
-    public String downloadSong(String songMid){
-        String songName = this.getSongName(songMid);
-        if(StringUtils.isBlank(songName)){
-            return "未找到歌曲";
-        }
+    public String downloadSong(String songMid, Long songId, String songName){
+        String fileType = "m4a";
+        songName += "." + fileType;
         String downloadUrl = URLConstant.DOWNLOAD_SONG + getPurl(songMid);
-        String localPath = DOWNLOAD_PATH + songName + ".m4a";
+        String localPath = DOWNLOAD_PATH + songName;
         String error = CustomFileUtil.downloadRemoteFile(downloadUrl,localPath);
-        return null == error ? "歌曲已下载至["+localPath+"]" : "歌曲下载失败";
+        MongoFile fileInfo = mongoFileService.upload(localPath,songId, songName, fileType);
+        return null != fileInfo ? fileInfo.getFileId() : null;
+    }
+
+    public void download(String songMid, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        QqSong qqSong = this.getSong(songMid);
+        if(null == qqSong || null == qqSong.getSongId()){
+            return;
+        }
+        if(mongoFileService.isExistFile(qqSong.getSongId())){
+            mongoFileService.download(qqSong.getSongId(),request,response);
+        }else{
+            String error =  this.downloadSong(songMid, qqSong.getSongId(), qqSong.getSongName());
+            if(null == error){
+                mongoFileService.download(qqSong.getSongId(),request,response);
+            }
+        }
     }
 
     //获取下载的拼接地址
@@ -58,14 +79,14 @@ public class DownloadSongService {
         return null;
     }
 
-    public String getSongName(String songMid){
+    public QqSong getSong(String songMid){
         QueryWrapper<QqSong> wrapper = new QueryWrapper<>();
         wrapper.eq(QqSong.FIELD_SONG_MID, songMid);
         QqSong qqSong = qqSongService.getOne(wrapper);
         if(null == qqSong){
             return null;
         }
-        return qqSong.getSongName();
+        return qqSong;
     }
 
 }

@@ -36,20 +36,23 @@ public class QQSongService extends SuperServiceImpl<QqSongMapper, QqSong> {
     private QqAlbumSongMapper qqAlbumSongMapper;
 
     @Transactional
-    public void batchInsert(Long singerId, List<QQSongVO> list) {
+    public int batchInsert(Long singerId, List<QQSongVO> list) {
         if(CollectionUtils.isEmpty(list)){
-            return;
+            return 0;
         }
+        int total = 0;
         for(QQSongVO songVO : list){
-            this.saveSingle(singerId,songVO);
+            total += this.saveSingle(singerId,songVO);
         }
+        return total;
     }
 
-    public void saveSingle(Long singerId, QQSongVO songVO){
+    public int saveSingle(Long singerId, QQSongVO songVO){
         if(!isExistSong(songVO.getSongId())){
             QqSong song = new QqSong();
             ReflectionUtilEX.copyProperities(songVO,song);
             this.save(song);
+            return 1;
         }
         if(!isExistSingerSong(singerId,songVO.getSongId())){
             QqSingerSong singerSong = new QqSingerSong();
@@ -63,6 +66,7 @@ public class QQSongService extends SuperServiceImpl<QqSongMapper, QqSong> {
             albumSong.setSongId(songVO.getSongId());
             qqAlbumSongMapper.insert(albumSong);
         }
+        return 0;
     }
 
     private boolean isExistSong(Long songId){

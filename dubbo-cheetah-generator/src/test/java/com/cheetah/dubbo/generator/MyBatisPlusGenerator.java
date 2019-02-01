@@ -31,7 +31,7 @@ public class MyBatisPlusGenerator {
 	
 	public static String[] superEntityColumns = new String[]{"tenant_id","creater","create_time","last_modifier","last_modify_time"};
 	
-	public static String[] tables = new String[]{"t_qq_album"};
+	public static String[] tables = new String[]{"t_mongo_file"};
 	
 	@Test
 	public void genCode() throws SQLException {
@@ -82,11 +82,11 @@ public class MyBatisPlusGenerator {
 		// 4. 包名策略配置
 		Map<String,String> pathInfo = new HashMap<>(4);
 		pathInfo.put(ConstVal.ENTITY_PATH, ENTITY_PATH);
-		//pathInfo.put(ConstVal.SERVICE_PATH, SERVICE_PATH);
+		pathInfo.put(ConstVal.SERVICE_PATH, SERVICE_PATH);
 		
 		pathInfo.put(ConstVal.MAPPER_PATH, MAPPER_PATH);
 		pathInfo.put(ConstVal.XML_PATH, MAPPER_XML_PATH);
-		//pathInfo.put(ConstVal.SERVICE_IMPL_PATH, SERVICE_IMPL_PATH);
+		pathInfo.put(ConstVal.SERVICE_IMPL_PATH, SERVICE_IMPL_PATH);
 
 		//pathInfo.put(ConstVal.CONTROLLER_PATH, CONTROLLER_PATH);
 		

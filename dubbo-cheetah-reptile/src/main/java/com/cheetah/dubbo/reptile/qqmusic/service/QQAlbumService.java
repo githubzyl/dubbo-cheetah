@@ -36,10 +36,11 @@ public class QQAlbumService extends SuperServiceImpl<QqAlbumMapper, QqAlbum> {
     private QqSingerMapper qqSingerMapper;
 
     @Transactional
-    public void batchInsert(String singerMid,List<QQAlbumVO> albums) {
+    public int batchInsert(String singerMid,List<QQAlbumVO> albums) {
         if(CollectionUtils.isEmpty(albums)){
-            return;
+            return 0;
         }
+        int total = 0;
         Long singerId = this.getSingerId(singerMid);
         QqAlbum album = null;
         for(QQAlbumVO albumVO : albums){
@@ -48,6 +49,7 @@ public class QQAlbumService extends SuperServiceImpl<QqAlbumMapper, QqAlbum> {
                 albumVO.setAlbumPic(null);
                 ReflectionUtilEX.copyProperities(albumVO,album);
                 this.save(album);
+                total++;
                 if(!isExistSingerAlbum(singerId,album.getAlbumId())){
                     QqSingerAlbum singerAlbum = new QqSingerAlbum();
                     singerAlbum.setSingerId(singerId);
@@ -56,6 +58,7 @@ public class QQAlbumService extends SuperServiceImpl<QqAlbumMapper, QqAlbum> {
                 }
             }
         }
+        return total;
     }
 
     private boolean isExistAlbum(Long albumId){

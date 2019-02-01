@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,21 +31,31 @@ public class GetQQSingerService {
     @Autowired
     private QQSingerService singerService;
 
-    public void get(Integer index,Integer cur_page){
-        QuerySingerParam param = buildParam(index,cur_page);
-        String data = JSONObject.toJSONString(param);
-        try {
-            data = URLEncoder.encode(data,"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+    public int get(Integer index, Integer cur_page, Integer max_page) {
+        int total = 0;
+        QuerySingerParam param = null;
+        String data = null, url = null, result = null;
+        List<QqSinger> list = new ArrayList<>();
+        if(-1 == max_page){
+            max_page = Integer.MAX_VALUE;
         }
-        String url = URLConstant.GET_SINGER + data;
-        String result = this.handleResult(url);
-        List<QqSinger> list = JsonUtils.parseArray(result, QqSinger.class);
-        singerService.batchInsert(list);
+        for (int i = cur_page; i <= max_page; i++) {
+            param = buildParam(index, i);
+            data = JSONObject.toJSONString(param);
+            try {
+                data = URLEncoder.encode(data, "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            url = URLConstant.GET_SINGER + data;
+            result = this.handleResult(url);
+            list = JsonUtils.parseArray(result, QqSinger.class);
+            total += singerService.batchInsert(list);
+        }
+        return total;
     }
 
-    public QuerySingerParam buildParam(Integer index,Integer cur_page){
+    public QuerySingerParam buildParam(Integer index, Integer cur_page) {
         QuerySingerParam param = new QuerySingerParam();
         param.setComm(new Comm());
         SingerListParam singerListParam = new SingerListParam();
@@ -56,12 +67,12 @@ public class GetQQSingerService {
         return param;
     }
 
-    public String handleResult(String url){
+    public String handleResult(String url) {
         String result = HttpUtils.get(url);
         JSONObject json = JSONObject.parseObject(result);
-        if(0 == json.getIntValue("code")){
+        if (0 == json.getIntValue("code")) {
             json = json.getJSONObject("singerList");
-            if(0 == json.getIntValue("code")){
+            if (0 == json.getIntValue("code")) {
                 json = json.getJSONObject("data");
                 return json.getJSONArray("singerlist").toJSONString();
             }

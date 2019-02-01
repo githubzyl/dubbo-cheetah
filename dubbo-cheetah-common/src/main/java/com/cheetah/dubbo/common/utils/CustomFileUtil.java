@@ -153,7 +153,7 @@ public class CustomFileUtil {
 		download(fileName, new FileInputStream(filePath), request, response);
 	}
 
-	public static void downloadFile(String fileName, FileInputStream fileInputStream, HttpServletRequest request,
+	public static void downloadFile(String fileName, InputStream fileInputStream, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		download(fileName, fileInputStream, request, response);
 	}
@@ -297,7 +297,7 @@ public class CustomFileUtil {
 		}
 	}
 
-	private static void download(String fileName, FileInputStream fileInputStream, HttpServletRequest request,
+	private static void download(String fileName, InputStream fileInputStream, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initDownloadParams(fileName, request, response);
 		download(fileInputStream, response);

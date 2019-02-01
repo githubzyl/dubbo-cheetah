@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,24 +31,35 @@ public class GetQQAlbumService {
     @Autowired
     private QQAlbumService qqAlbumService;
 
-    public void get(String singer_mid, Integer cur_page, Integer num, Integer max_page) {
-        QueryAlbumParam param = buildParam(singer_mid,cur_page,num);
-        String data = JSONObject.toJSONString(param);
-        try {
-            data = URLEncoder.encode(data,"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+    public int get(String singer_mid, Integer cur_page, Integer num, Integer max_page) {
+        int total = 0;
+        QueryAlbumParam param = null;
+        String data = null, url = null;
+        JSONArray jsonArray = null;
+        List<QQAlbumVO> list = new ArrayList<>();
+        if(-1 == max_page){
+            max_page = Integer.MAX_VALUE;
         }
-        String url = URLConstant.GET_ALBUM + data;
-        JSONArray jsonArray = this.handleResult(url);
-        if(null == jsonArray || jsonArray.size() <= 0){
-            return;
+        for (int i = cur_page; i <= max_page; i++) {
+            param = buildParam(singer_mid, i, num);
+            data = JSONObject.toJSONString(param);
+            try {
+                data = URLEncoder.encode(data, "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            url = URLConstant.GET_ALBUM + data;
+            jsonArray = this.handleResult(url);
+            if (null == jsonArray || jsonArray.size() <= 0) {
+                break;
+            }
+            list = JSONObject.parseArray(jsonArray.toJSONString(), QQAlbumVO.class);
+            total += qqAlbumService.batchInsert(singer_mid, list);
         }
-        List<QQAlbumVO> list = JSONObject.parseArray(jsonArray.toJSONString(), QQAlbumVO.class);
-        qqAlbumService.batchInsert(singer_mid,list);
+        return total;
     }
 
-    public QueryAlbumParam buildParam(String singer_mid, Integer cur_page,Integer num){
+    public QueryAlbumParam buildParam(String singer_mid, Integer cur_page, Integer num) {
         QueryAlbumParam param = new QueryAlbumParam();
         param.setComm(new Comm());
         SingerAlbumParam singerAlbumParam = new SingerAlbumParam();
@@ -67,7 +79,7 @@ public class GetQQAlbumService {
             json = json.getJSONObject("singerAlbum");
             if (0 == json.getIntValue("code")) {
                 json = json.getJSONObject("data");
-                if(json.containsKey("list")){
+                if (json.containsKey("list")) {
                     return json.getJSONArray("list");
                 }
             }
