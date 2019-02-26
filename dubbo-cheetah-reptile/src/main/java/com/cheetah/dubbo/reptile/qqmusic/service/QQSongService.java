@@ -1,5 +1,7 @@
 package com.cheetah.dubbo.reptile.qqmusic.service;
 
+import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PutObjectResult;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cheetah.dubbo.base.entity.QqAlbumSong;
 import com.cheetah.dubbo.base.entity.QqSingerSong;
@@ -9,7 +11,11 @@ import com.cheetah.dubbo.base.mapper.QqAlbumSongMapper;
 import com.cheetah.dubbo.base.mapper.QqSingerSongMapper;
 import com.cheetah.dubbo.base.mapper.QqSongMapper;
 import com.cheetah.dubbo.common.supers.SuperServiceImpl;
+import com.cheetah.dubbo.common.utils.EncdDecd;
 import com.cheetah.dubbo.common.utils.ReflectionUtilEX;
+import com.cheetah.dubbo.reptile.qqmusic.common.OSSConstant;
+import com.cheetah.dubbo.reptile.qqmusic.core.DownloadSongService;
+import com.cheetah.dubbo.reptile.service.OSSFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +40,12 @@ public class QQSongService extends SuperServiceImpl<QqSongMapper, QqSong> {
 
     @Autowired
     private QqAlbumSongMapper qqAlbumSongMapper;
+
+    @Autowired
+    private OSSFileService ossFileService;
+
+    @Autowired
+    private DownloadSongService downloadSongService;
 
     @Transactional
     public int batchInsert(Long singerId, List<QQSongVO> list) {
@@ -67,6 +79,24 @@ public class QQSongService extends SuperServiceImpl<QqSongMapper, QqSong> {
             qqAlbumSongMapper.insert(albumSong);
         }
         return 0;
+    }
+
+    public String uploadSongM4a(String song_mid) throws Exception {
+        QueryWrapper<QqSong> wrapper = new QueryWrapper<>();
+        wrapper.eq(QqSong.FIELD_SONG_MID, song_mid);
+        QqSong qqSong = this.getOne(wrapper);
+        if(null == qqSong){
+            return "未找到对应歌曲";
+        }
+        String songUrl = downloadSongService.getDownloadUrl(song_mid);
+        String fileName = EncdDecd.MD5String(qqSong.getSongId() + song_mid) + ".m4a";
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.addUserMetadata("song_mid",song_mid);
+        PutObjectResult result = ossFileService.uploadToDefaultBucket(songUrl, OSSConstant.AUDIO_DIRECTORY, fileName,null);
+        if(null == result){
+            throw new Exception("歌曲文件上传到OSS服务器失败");
+        }
+        return ossFileService.getPreviewUrl(OSSConstant.AUDIO_DIRECTORY, fileName, false);
     }
 
     private boolean isExistSong(Long songId){

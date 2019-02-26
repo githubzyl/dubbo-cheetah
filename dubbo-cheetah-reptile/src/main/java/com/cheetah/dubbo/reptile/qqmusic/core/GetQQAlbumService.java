@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cheetah.dubbo.base.entity.vo.QQAlbumVO;
 import com.cheetah.dubbo.common.utils.HttpUtils;
-import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.Comm;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.QueryAlbumParam;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.SingerAlbum;
@@ -48,7 +48,7 @@ public class GetQQAlbumService {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            url = URLConstant.GET_ALBUM + data;
+            url = QQMusicConstant.GET_ALBUM + data;
             jsonArray = this.handleResult(url);
             if (null == jsonArray || jsonArray.size() <= 0) {
                 break;

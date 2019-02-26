@@ -15,21 +15,9 @@
         <module name="dubbo-cheetah-server" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="demo" target="1.8" />
-      <module name="dubbo-cheetah" target="1.8" />
-      <module name="dubbo-cheetah-api" target="1.8" />
-      <module name="dubbo-cheetah-base" target="1.8" />
-      <module name="dubbo-cheetah-client" target="1.8" />
-      <module name="dubbo-cheetah-common" target="1.8" />
-      <module name="dubbo-cheetah-generator" target="1.8" />
-      <module name="dubbo-cheetah-reptile" target="1.8" />
-      <module name="dubbo-cheetah-server" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="demo" options="-parameters" />
       <module name="dubbo-cheetah-api" options="-parameters" />
       <module name="dubbo-cheetah-base" options="-parameters" />
       <module name="dubbo-cheetah-client" options="-parameters" />

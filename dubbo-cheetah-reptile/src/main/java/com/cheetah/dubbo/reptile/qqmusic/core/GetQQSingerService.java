@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cheetah.dubbo.base.entity.QqSinger;
 import com.cheetah.dubbo.common.utils.HttpUtils;
 import com.cheetah.dubbo.common.utils.JsonUtils;
-import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.Comm;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.QuerySingerParam;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.SingerList;
@@ -47,7 +47,7 @@ public class GetQQSingerService {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            url = URLConstant.GET_SINGER + data;
+            url = QQMusicConstant.GET_SINGER + data;
             result = this.handleResult(url);
             list = JsonUtils.parseArray(result, QqSinger.class);
             total += singerService.batchInsert(list);

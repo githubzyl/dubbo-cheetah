@@ -1,7 +1,8 @@
 package com.cheetah.dubbo.reptile.qqmusic.core;
 
+import com.cheetah.dubbo.base.entity.vo.QQSingerDesc;
 import com.cheetah.dubbo.common.utils.HttpUtils;
-import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -28,13 +29,20 @@ public class GetQQSingerDescService {
 
     private String singerDescDb = "singer_desc";
 
+
+    public QQSingerDesc getDesc(String singerMid) throws Exception {
+        String xmlDec = this.get(singerMid);
+        return new QQSingerDesc(xmlDec).getInstance();
+    }
+
+
     public String get(String singerMid){
         Query query = new Query();
         Criteria criteria = Criteria.where("singerMid").is(singerMid);
         query.addCriteria(criteria);
         List<Map> list = mongoTemplate.find(query,Map.class,singerDescDb);
         if(CollectionUtils.isEmpty(list)){
-            String url = URLConstant.GET_SINGER_DESC + singerMid;
+            String url = QQMusicConstant.GET_SINGER_DESC + singerMid;
             String result = this.handleResult(url);
             Map<String,Object> map = new HashMap<>();
             map.put("singerMid",singerMid);

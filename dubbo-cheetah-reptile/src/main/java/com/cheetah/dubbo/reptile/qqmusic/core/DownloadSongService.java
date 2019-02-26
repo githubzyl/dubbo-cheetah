@@ -7,7 +7,7 @@ import com.cheetah.dubbo.base.entity.MongoFile;
 import com.cheetah.dubbo.base.entity.QqSong;
 import com.cheetah.dubbo.common.utils.CustomFileUtil;
 import com.cheetah.dubbo.common.utils.HttpUtils;
-import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.DownloadSongParam;
 import com.cheetah.dubbo.reptile.qqmusic.service.QQSongService;
 import com.cheetah.dubbo.reptile.service.MongoFileService;
@@ -39,7 +39,7 @@ public class DownloadSongService {
     public String downloadSong(String songMid, Long songId, String songName){
         String fileType = "m4a";
         songName += "." + fileType;
-        String downloadUrl = URLConstant.DOWNLOAD_SONG + getPurl(songMid);
+        String downloadUrl = getDownloadUrl(songMid);
         String localPath = DOWNLOAD_PATH + songName;
         String error = CustomFileUtil.downloadRemoteFile(downloadUrl,localPath);
         MongoFile fileInfo = mongoFileService.upload(localPath,songId, songName, fileType);
@@ -61,10 +61,15 @@ public class DownloadSongService {
         }
     }
 
+    public String getDownloadUrl(String songMid){
+       return QQMusicConstant.DOWNLOAD_SONG + getPurl(songMid);
+    }
+
+
     //获取下载的拼接地址
     public String getPurl(String songMid){
         String data = new DownloadSongParam(songMid).toJsonString();
-        String url = URLConstant.GET_VKEY + data;
+        String url = QQMusicConstant.GET_VKEY + data;
         String result = HttpUtils.get(url);
         JSONObject json = JSONObject.parseObject(result);
         if (0 == json.getIntValue("code")) {

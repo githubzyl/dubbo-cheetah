@@ -29,8 +29,7 @@ public class UserController extends SuperController {
 	@GetMapping("/page")
 	public Object page(@RequestParam(defaultValue = "1") Integer pageNum,
 			@RequestParam(defaultValue = "10") Integer pageSize) {
-		Page<User> page = new Page<>(pageNum, pageSize);
-		return userServiceManager.queryPage(page);
+		return this.ajaxSuccess(userServiceManager.queryPage(pageNum,pageSize,null));
 	}
 
 }

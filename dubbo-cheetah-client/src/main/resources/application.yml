@@ -1,5 +1,7 @@
 server: 
   port: 9098
+  servlet:
+    context-path: /cheetah/api
 dubbo: 
     application:
       name: consumer-client
@@ -7,6 +9,6 @@ dubbo:
       name: dubbo
       port: 20880
     registry: 
-      address: zookeeper://127.0.0.1:2181
+      address: zookeeper://47.98.113.109:2181
     consumer: 
       timeout: 5000

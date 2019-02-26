@@ -48,6 +48,6 @@ dubbo:
        port: 8088
        name: rest
     registry: 
-      address: zookeeper://127.0.0.1:2181
+      address: zookeeper://47.98.113.109:2181
     provider: 
      timeout: 1000    

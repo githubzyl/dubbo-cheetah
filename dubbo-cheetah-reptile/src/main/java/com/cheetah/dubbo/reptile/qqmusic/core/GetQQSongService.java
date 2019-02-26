@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cheetah.dubbo.base.entity.vo.QQSongVO;
 import com.cheetah.dubbo.common.utils.HttpUtils;
-import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import com.cheetah.dubbo.reptile.qqmusic.service.QQSongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,7 +61,7 @@ public class GetQQSongService {
 
     public String buildParam(String singer_mid, Integer cur_page, Integer num) {
         int begin = (cur_page - 1) * num;
-        StringBuilder sb = new StringBuilder(URLConstant.GET_SONG);
+        StringBuilder sb = new StringBuilder(QQMusicConstant.GET_SONG);
         sb.append("&singermid=").append(singer_mid)
                 .append("&num=").append(num)
                 .append("&begin=").append(begin);

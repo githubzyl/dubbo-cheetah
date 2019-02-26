@@ -1,7 +1,7 @@
 package com.cheetah.dubbo.reptile;
 
 import com.cheetah.dubbo.common.utils.HttpUtils;
-import com.cheetah.dubbo.reptile.qqmusic.common.URLConstant;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import com.cheetah.dubbo.reptile.qqmusic.common.param.DownloadSongParam;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class Test1 {
     @Test
     public void test2() {
         String data = new DownloadSongParam("001Qu4I30eVFYb").toJsonString();
-        String url = URLConstant.GET_VKEY + data;
+        String url = QQMusicConstant.GET_VKEY + data;
         String result = HttpUtils.get(url);
         System.out.println(result);
     }

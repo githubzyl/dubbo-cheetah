@@ -1,7 +1,11 @@
 package com.cheetah.dubbo.reptile.controller;
 
+import com.cheetah.dubbo.base.entity.vo.QQSingerDesc;
 import com.cheetah.dubbo.common.supers.SuperController;
+import com.cheetah.dubbo.reptile.qqmusic.common.QQMusicConstant;
 import com.cheetah.dubbo.reptile.qqmusic.core.*;
+import com.cheetah.dubbo.reptile.qqmusic.service.QQSingerService;
+import com.cheetah.dubbo.reptile.qqmusic.service.QQSongService;
 import com.cheetah.dubbo.reptile.service.MongoFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,32 +52,46 @@ public class QQMusicController extends SuperController {
     @Autowired
     private MongoFileService mongoFileService;
 
+    @Autowired
+    private QQSingerService qqSingerService;
+
+    @Autowired
+    private QQSongService qqSongService;
+
+    @Autowired
+    private QQMusicSearchService qqMusicSearchService;
+
     @ApiOperation(value = "获取歌手")
     @GetMapping("/singer")
     @ResponseBody
     public Object getSinger(@RequestParam @ApiParam(value = "歌手类型") Integer index, @RequestParam @ApiParam(value = "开始页码") Integer cur_page, @RequestParam(defaultValue = "100") @ApiParam(value = "最大页数") Integer max_page) {
-        return getQQSingerService.get(index, cur_page, max_page);
+        return this.ajaxSuccess(getQQSingerService.get(index, cur_page, max_page));
     }
 
     @ApiOperation(value = "获取歌曲")
     @GetMapping("/song")
     @ResponseBody
     public Object getSong(@RequestParam @ApiParam(value = "歌手mid") String singer_mid, @RequestParam @ApiParam(value = "开始页码") Integer cur_page, @RequestParam(defaultValue = "100") @ApiParam(value = "每页条数") Integer num, @RequestParam(defaultValue = "-1") @ApiParam(value = "最大页数") Integer max_page) {
-        return getQQSongService.get(singer_mid, cur_page, num, max_page);
+        return this.ajaxSuccess(getQQSongService.get(singer_mid, cur_page, num, max_page));
     }
 
     @ApiOperation(value = "获取专辑")
     @GetMapping("/album")
     @ResponseBody
     public Object getAlbum(@RequestParam @ApiParam(value = "歌手mid") String singer_mid, @RequestParam @ApiParam(value = "开始页码") Integer cur_page, @RequestParam(defaultValue = "100") @ApiParam(value = "每页条数") Integer num, @RequestParam(defaultValue = "-1") @ApiParam(value = "最大页数") Integer max_page) {
-        return getQQAlbumService.get(singer_mid, cur_page, num, max_page);
+        return this.ajaxSuccess(getQQAlbumService.get(singer_mid, cur_page, num, max_page));
     }
 
     @ApiOperation(value = "获取歌手简介")
     @GetMapping("/singer/desc")
     @ResponseBody
-    public Object getSingerDesc(@RequestParam @ApiParam(value = "歌手mid") String singer_mid) {
-        return getQQSingerDescService.get(singer_mid);
+    public Object getSingerDesc(@RequestParam @ApiParam(value = "歌手mid") String singer_mid) throws Exception {
+        QQSingerDesc desc = getQQSingerDescService.getDesc(singer_mid);
+        String str = null;
+        if (null != desc) {
+            str = desc.toHtmlString();
+        }
+        return this.ajaxSuccess(str);
     }
 
     @ApiOperation(value = "下载歌曲")
@@ -81,5 +99,43 @@ public class QQMusicController extends SuperController {
     public void downloadSong(@RequestParam @ApiParam(value = "歌曲mid") String song_mid, HttpServletRequest request, HttpServletResponse response) throws Exception {
         downloadSongService.download(song_mid, request, response);
     }
+
+    @ApiOperation(value = "上传歌手头像到OSS")
+    @GetMapping("/singer/photo/upload")
+    @ResponseBody
+    public Object uploadSingerImageToOss(@RequestParam @ApiParam(value = "歌手mid") String singer_mid) throws Exception {
+        return this.ajaxSuccess(qqSingerService.uploadPhoto(singer_mid));
+    }
+
+    @ApiOperation(value = "上传歌曲文件到OSS")
+    @GetMapping("/song/m4a/upload")
+    @ResponseBody
+    public Object uploadSongM4aToOss(@RequestParam @ApiParam(value = "歌曲mid") String song_mid) throws Exception {
+        return this.ajaxSuccess(qqSongService.uploadSongM4a(song_mid));
+    }
+
+    @ApiOperation(value = "获取QQ音乐歌曲的下载url")
+    @GetMapping("/song/url")
+    @ResponseBody
+    public Object getSongUrl(@RequestParam @ApiParam(value = "歌曲mid") String song_mid) {
+        return this.ajaxSuccess(downloadSongService.getDownloadUrl(song_mid));
+    }
+
+    @ApiOperation(value = "根据关键字搜索补全搜索框")
+    @GetMapping("/searchbox")
+    @ResponseBody
+    public Object searchBox(@RequestParam @ApiParam(value = "搜索关键字") String keyword) {
+        return this.ajaxSuccess(qqMusicSearchService.searchByKeywordForSearchBox(keyword));
+    }
+
+    @ApiOperation(value = "根据关键字搜索")
+    @GetMapping("/search")
+    @ResponseBody
+    public Object searchByKeyword(@RequestParam @ApiParam(value = "搜索关键字") String keyword,
+                                  @RequestParam(defaultValue = "1") @ApiParam(value = "搜索类型") Integer search_type,
+                                  @RequestParam(defaultValue = "1") @ApiParam(value = "搜索页码") Integer page_num) {
+       return this.ajaxSuccess(qqMusicSearchService.searchByKeyword(keyword,search_type,page_num));
+    }
+
 
 }
