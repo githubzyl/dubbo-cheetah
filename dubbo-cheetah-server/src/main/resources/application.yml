@@ -30,7 +30,7 @@ spring:
 server:
   port: 9099
 mybatis-plus:
-  config-location: classpath:config/mybatis-config.xml
+  config-location: classpath:demo/mybatis-demo.xml
   mapper-locations: classpath*:mapper/*.xml
   typeEnumsPackage: com.cheetah.dubbo.base.enums
 dubbo: 

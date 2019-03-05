@@ -113,7 +113,7 @@ public class CustomGenerator {
         List<TableInfo> tableList = this.getAllTableInfoList(config);
         for (TableInfo tableInfo : tableList) {
             /* ---------- 添加导入包 ---------- */
-//            if (config.getGlobalConfig().isActiveRecord()) {
+//            if (demo.getGlobalConfig().isActiveRecord()) {
 //                // 开启 ActiveRecord 模式
 //                tableInfo.setImportPackages(Model.class.getCanonicalName());
 //            }

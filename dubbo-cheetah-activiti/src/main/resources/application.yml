@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/cheetah_activiti?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate.ddl-auto: update
+    naming:
+      strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    dialect: org.hibernate.dialect.MySQL5Dialect
+  activiti:
+    database-schema-update: true
+    history-level: full
+server:
+  servlet:
+    context-path: /activiti
+  port: 10002

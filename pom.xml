@@ -66,6 +66,8 @@
         <module>dubbo-cheetah-client</module>
         <module>dubbo-cheetah-server</module>
         <module>dubbo-cheetah-generator</module>
+        <module>dubbo-cheetah-activiti</module>
+        <module>dubbo-cheetah-batch</module>
     </modules>
     <build>
 		<plugins>

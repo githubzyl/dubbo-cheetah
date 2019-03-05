@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="dubbo-cheetah-activiti" />
         <module name="dubbo-cheetah-api" />
         <module name="dubbo-cheetah-base" />
+        <module name="dubbo-cheetah-batch" />
         <module name="dubbo-cheetah-client" />
         <module name="dubbo-cheetah-common" />
         <module name="dubbo-cheetah-generator" />
@@ -18,8 +20,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dubbo-cheetah-activiti" options="-parameters" />
       <module name="dubbo-cheetah-api" options="-parameters" />
       <module name="dubbo-cheetah-base" options="-parameters" />
+      <module name="dubbo-cheetah-batch" options="-parameters" />
       <module name="dubbo-cheetah-client" options="-parameters" />
       <module name="dubbo-cheetah-common" options="-parameters" />
       <module name="dubbo-cheetah-generator" options="-parameters" />

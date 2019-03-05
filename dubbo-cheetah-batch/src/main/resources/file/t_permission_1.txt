@@ -1,0 +1,11 @@
+system,系统管理,
+system:user:view,用户管理,/page/user/userList
+system:role:view,角色管理,/page/role/roleList
+system:permission:view,权限管理,/page/permission/permissionList
+system:dictType:view,字典类型,/page/dictionary/typeList
+system:dataDict:view,数据字典,/page/dictionary/dataList
+system:job:view,定时任务,/page/job/jobList
+system:druidMonitor:view,Druid监控,/druid/index.html
+logManager,日志管理,
+logManager:loginLog:view,登录日志,/page/log/userLoginLog
+logManager:viewLog:view,访问日志,/page/log/userViewLog

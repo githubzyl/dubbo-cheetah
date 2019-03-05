@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cheetah_batch?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false
+    schema: classpath:/org/springframework/batch/core/schema-mysql.sql
+  batch:
+    initialize-schema: always
+    job:
+      enabled: false #任务启动时不会自动执行
+#      names: parentJob,listenerJobDemo
+server:
+  servlet:
+    context-path: /batch
+  port: 10003
