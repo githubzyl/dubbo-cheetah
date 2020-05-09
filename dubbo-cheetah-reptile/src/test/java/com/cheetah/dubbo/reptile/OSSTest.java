@@ -13,10 +13,10 @@ public class OSSTest {
 
     @Test
     public void upload() throws Exception {
-        String endpoint = "http://oss-cn-hangzhou.aliyuncs.com";
-        String accessKeyId = "LTAIegzSYWFrlUuX";
-        String accessKeySecret = "5YW76SocX8ALAo0yoZfaVGeeN8l4HB";
-        String bucketName = "jason-file-1";
+        String endpoint = "";
+        String accessKeyId = "";
+        String accessKeySecret = "";
+        String bucketName = "";
         OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
         InputStream inputStream = new URL("http://y.gtimg.cn/music/photo_new/T001R150x150M0000013RsPD3Xs0FG.webp").openStream();
         PutObjectResult result = ossClient.putObject(bucketName, "image/banyang.webp", inputStream);
