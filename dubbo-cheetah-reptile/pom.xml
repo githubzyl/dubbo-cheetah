@@ -18,7 +18,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <mysqlconn.version>5.1.41</mysqlconn.version>
+        <mysqlconn.version>8.0.28</mysqlconn.version>
         <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
         <dynamic-datasource-spring-boot-starter.version>2.4.2</dynamic-datasource-spring-boot-starter.version>
         <swagger.version>2.6.1</swagger.version>
